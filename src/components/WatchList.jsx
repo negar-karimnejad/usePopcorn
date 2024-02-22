@@ -24,21 +24,17 @@ function WatchList({ watchListMovies, deleteFromWachlist }) {
         <div className="px-4 flex justify-between items-center">
           <SummaryBox>
             <span>#️⃣</span>
-            {watchListMovies?.length}
-            <br />
-            movies
+            {watchListMovies?.length} movies
           </SummaryBox>
           <SummaryBox>
             <p>⭐{totalRating?.toFixed(2)}</p>
           </SummaryBox>
           <SummaryBox>
-            <p>🌟{totalUserRating}</p>
+            <p>🌟{totalUserRating?.toFixed(2)}</p>
           </SummaryBox>
           <SummaryBox>
             <span>⏳</span>
-            {totalDuration}
-            <br />
-            min
+            {totalDuration} min
           </SummaryBox>
         </div>
       </div>
@@ -54,7 +50,7 @@ function WatchList({ watchListMovies, deleteFromWachlist }) {
               <div className="w-8/12">
                 <p className="mb-3 font-bold text-lg">{movie.Title}</p>
                 <button
-                  onClick={() => deleteFromWachlist(movie.imdbRating)}
+                  onClick={() => deleteFromWachlist(movie.imdbID)}
                   className="absolute top-8 right-4 bg-red-500 flex items-center justify-center rounded-full w-5 h-5 pb-0.5"
                 >
                   &times;

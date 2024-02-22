@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import Input from "./Input";
 
-function Navbar({ setQuery, search }) {
+function Navbar({ movies, setQuery, search }) {
   return (
     <div className="bg-violet-700 text-white rounded-lg p-4 flex items-center justify-between">
       <h1 className="text-2xl font-bold">🍿usePopcorn</h1>
@@ -12,7 +12,7 @@ function Navbar({ setQuery, search }) {
           changeHandler={(e) => setQuery(e.target.value)}
         />
       </form>
-      <p className="text-lg">Found 0 results</p>
+      <p className="text-lg">Found {movies?.length} results</p>
     </div>
   );
 }

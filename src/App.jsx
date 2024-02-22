@@ -6,6 +6,8 @@ import MovieLists from "./components/MovieLists";
 import Navbar from "./components/Navbar";
 import Rightbar from "./components/Rightbar";
 import WatchList from "./components/WatchList";
+import MovieInfoes from "./components/MovieInfoes";
+import RightHeader from "./components/RightHeader";
 
 const KEY = "9b288b21";
 
@@ -74,15 +76,19 @@ function App() {
 
   const onClick = () => {
     setExpand((prev) => !prev);
+    console.log("ppp");
   };
 
   const addToList = () => {
-    if (
-      watchListMovies.find((movie) => movie.imdbID === selectedMovie.imdbID)
-    ) {
+    const existInWatchlist = watchListMovies.find(
+      (movie) => movie.imdbID === selectedMovie.imdbID
+    );
+
+    if (existInWatchlist) {
       return alert("This movie already added");
     } else {
       setShowWatchList(true);
+      setMovieRating(0);
       setWatchListMovies((prev) => [
         ...prev,
         { ...selectedMovie, movieRating },
@@ -91,24 +97,21 @@ function App() {
   };
 
   const deleteFromWachlist = (id) => {
-    return setWatchListMovies((watchListMovies) =>
-      watchListMovies.map((item) => {
-        if (item.id === id) {
-          return watchListMovies.filter((movie) => movie.id !== id);
-        }
-        return item;
-      })
-    );
+    setWatchListMovies((prev) => prev.filter((movie) => movie.imdbID !== id));
   };
 
-  const handleMovieRating = (rating) => {
-    setMovieRating(rating);
-  };
+  // const handleMovieRating = (value) => {
+  //   return setMovieRating(value);
+  // };
 
+  const clickHandler = () => {
+    setExpand((prev) => !prev);
+    console.log("fff");
+  };
   return (
     <div className="bg-slate-800">
       <div className="p-4 max-w-7xl min-w-[300px] mx-auto">
-        <Navbar setQuery={setQuery} query={query} />
+        <Navbar movies={movies} setQuery={setQuery} query={query} />
 
         <Main>
           <Leftbar>
@@ -129,15 +132,32 @@ function App() {
               deleteFromWachlist={deleteFromWachlist}
             />
           ) : (
-            <Rightbar
-              setShowWatchList={setShowWatchList}
-              selectedMovie={selectedMovie}
-              addToList={addToList}
-              loading={loading}
-              movieRating={movieRating}
-              handleMovieRating={handleMovieRating}
-              watchListMovies={watchListMovies}
-            />
+            <Rightbar>
+              <Box expand={expand} onClick={clickHandler}>
+                {loading && (
+                  <p className="text-white text-center text-lg mt-14 animate-pulse">
+                    Loading...
+                  </p>
+                )}
+                {!expand && selectedMovie && !loading && (
+                  <div>
+                    <RightHeader
+                      selectedMovie={selectedMovie}
+                      setShowWatchList={setShowWatchList}
+                    />
+                    <MovieInfoes
+                      selectedMovie={selectedMovie}
+                      addToList={addToList}
+                      movieRating={movieRating}
+                      // handleMovieRating={handleMovieRating}
+                      watchListMovies={watchListMovies}
+                      expand={expand}
+                      onClick={onClick}
+                    />
+                  </div>
+                )}
+              </Box>
+            </Rightbar>
           )}
         </Main>
       </div>

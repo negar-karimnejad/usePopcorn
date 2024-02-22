@@ -18,7 +18,7 @@ function Star({
   color = "yellow",
   messages = [],
   defaultRating = 0,
-  handleMovieRating,
+  // handleMovieRating,
 }) {
   const [hoverRating, setHoverRating] = useState(0);
   const [rating, setRating] = useState(defaultRating);
@@ -33,7 +33,7 @@ function Star({
             className="cursor-pointer"
             onClick={() => {
               setRating(i + 1);
-              handleMovieRating(i + 1);
+              // handleMovieRating(i + 1);
             }}
           >
             {(hoverRating ? hoverRating >= i + 1 : rating >= i + 1) ? (
