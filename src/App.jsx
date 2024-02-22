@@ -43,12 +43,14 @@ function App() {
         setLoading(false);
       }
     };
+
     if (query.length < 3) {
       setMovies([]);
       setError("");
       return;
     }
 
+    setShowWatchList(true);
     fetchingMovies();
   }, [query]);
 
@@ -77,20 +79,9 @@ function App() {
   };
 
   const addToList = () => {
-    const existInWatchlist = watchListMovies.find(
-      (movie) => movie.imdbID === selectedMovie.imdbID
-    );
-
-    if (existInWatchlist) {
-      return alert("This movie already added");
-    } else {
-      setShowWatchList(true);
-      setMovieRating(0);
-      setWatchListMovies((prev) => [
-        ...prev,
-        { ...selectedMovie, movieRating },
-      ]);
-    }
+    setShowWatchList(true);
+    setMovieRating(0);
+    setWatchListMovies((prev) => [...prev, { ...selectedMovie, movieRating }]);
   };
 
   const deleteFromWachlist = (id) => {

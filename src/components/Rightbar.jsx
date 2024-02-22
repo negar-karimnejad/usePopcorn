@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 import { useEffect, useState } from "react";
 import Box from "./Box";
@@ -25,16 +26,24 @@ function Rightbar({
   useEffect(() => {
     document.title = `MOVIE| ${selectedMovie.Title}`;
 
-    window.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        setShowWatchList(true);
-      }
-    });
-
     return () => {
       document.title = `usePopcorn`;
     };
-  }, [selectedMovie.Title, setShowWatchList]);
+  }, [selectedMovie.Title]);
+
+  const handleUserKeyPress = (e) => {
+    if (e.key === "Escape") {
+      setShowWatchList(true);
+      console.log("gfbf");
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleUserKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleUserKeyPress);
+    };
+  }, [handleUserKeyPress]);
 
   return (
     <Box expand={expand} onClick={clickHandler}>
