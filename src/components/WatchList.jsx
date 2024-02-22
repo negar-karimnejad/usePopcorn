@@ -3,20 +3,21 @@ import Box from "./Box";
 import SummaryBox from "./SummaryBox";
 
 function WatchList({ watchListMovies, deleteFromWachlist }) {
-  const totalRating = watchListMovies?.reduce((total, item) => {
+  const totalRating = watchListMovies.reduce((total, item) => {
     total += Number(item.imdbRating);
     return total;
   }, 0);
 
-  const totalDuration = watchListMovies?.reduce((total, item) => {
+  const totalDuration = watchListMovies.reduce((total, item) => {
     total += Number(item.Runtime?.split(" ")[0]);
     return total;
   }, 0);
 
   const totalUserRating = watchListMovies.reduce((total, item) => {
-    total += item.movieRating;
-    return total / watchListMovies.length;
+    total += Number(item.movieRating / watchListMovies.length);
+    return total;
   }, 0);
+
   return (
     <Box>
       <div className="py-5 shadow-xl shadow-gray-800 rounded-xl pb-4">

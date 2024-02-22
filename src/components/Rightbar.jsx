@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "./Box";
 import MovieDetails from "./MovieDetails";
 import Star from "./Star";
@@ -21,6 +21,20 @@ function Rightbar({
   const existInWatchlist = watchListMovies.find(
     (movie) => movie.imdbID === selectedMovie.imdbID
   );
+
+  useEffect(() => {
+    document.title = `MOVIE| ${selectedMovie.Title}`;
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        setShowWatchList(true);
+      }
+    });
+
+    return () => {
+      document.title = `usePopcorn`;
+    };
+  }, [selectedMovie.Title, setShowWatchList]);
 
   return (
     <Box expand={expand} onClick={clickHandler}>

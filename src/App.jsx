@@ -74,7 +74,6 @@ function App() {
 
   const onClick = () => {
     setExpand((prev) => !prev);
-    console.log("ppp");
   };
 
   const addToList = () => {
