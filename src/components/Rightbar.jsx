@@ -11,12 +11,16 @@ function Rightbar({
   selectedMovie,
   addToList,
   setShowWatchList,
+  watchListMovies,
 }) {
   const [expand, setExpand] = useState(false);
 
   const clickHandler = () => {
     setExpand((prev) => !prev);
   };
+  const existInWatchlist = watchListMovies.find(
+    (movie) => movie.imdbID === selectedMovie.imdbID
+  );
 
   return (
     <Box expand={expand} onClick={clickHandler}>
@@ -51,17 +55,22 @@ function Rightbar({
             </div>
           </div>
 
-          <div className="bg-slate-600 rounded-lg p-3 mt-10 mx-auto w-5/6">
+          <button
+            disabled={existInWatchlist}
+            className="bg-slate-600 rounded-lg p-3 mt-10 mx-auto w-5/6"
+          >
             <Star
               maxRating={10}
               size={20}
               color={"yellow"}
               messages={["Terrible", "Bad", "Okay", "Good", "Amazing"]}
-              defaultRating={3}
+              defaultRating={
+                (existInWatchlist && watchListMovies[0]?.movieRating) || 0
+              }
               handleMovieRating={handleMovieRating}
             />
 
-            {movieRating > 0 && (
+            {!existInWatchlist && movieRating > 0 && (
               <button
                 onClick={addToList}
                 className="text-white font-bold bg-violet-600 w-full rounded-full py-2 mt-3"
@@ -69,7 +78,7 @@ function Rightbar({
                 + Add to list
               </button>
             )}
-          </div>
+          </button>
           <div className="my-5 mx-auto w-5/6 flex flex-col gap-4">
             <MovieDetails className="italic">{selectedMovie.Plot}</MovieDetails>
             <MovieDetails>Starring {selectedMovie.Actors}</MovieDetails>

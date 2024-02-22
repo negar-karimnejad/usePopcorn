@@ -20,8 +20,8 @@ function Star({
   defaultRating = 0,
   handleMovieRating,
 }) {
-  const [hoverRating, setHoverRating] = useState(defaultRating);
-  const [rating, setRating] = useState(0);
+  const [hoverRating, setHoverRating] = useState(0);
+  const [rating, setRating] = useState(defaultRating);
 
   return (
     <div className="flex items-center min-h-7">

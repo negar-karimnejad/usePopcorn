@@ -77,9 +77,9 @@ function App() {
   };
 
   const addToList = () => {
-    console.log(watchListMovies);
-    console.log(selectedMovie);
-    if (watchListMovies.map((movie) => movie.imdbID === selectedMovie.imdbID)) {
+    if (
+      watchListMovies.find((movie) => movie.imdbID === selectedMovie.imdbID)
+    ) {
       return alert("This movie already added");
     } else {
       setShowWatchList(true);
@@ -136,6 +136,7 @@ function App() {
               loading={loading}
               movieRating={movieRating}
               handleMovieRating={handleMovieRating}
+              watchListMovies={watchListMovies}
             />
           )}
         </Main>

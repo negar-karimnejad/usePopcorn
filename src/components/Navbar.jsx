@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import { movies } from "../data";
 import Input from "./Input";
 
 function Navbar({ setQuery, search }) {
@@ -13,7 +12,7 @@ function Navbar({ setQuery, search }) {
           changeHandler={(e) => setQuery(e.target.value)}
         />
       </form>
-      <p className="text-lg">Found {movies.length} results</p>
+      <p className="text-lg">Found 0 results</p>
     </div>
   );
 }
