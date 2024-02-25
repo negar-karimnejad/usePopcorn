@@ -6,8 +6,8 @@ import MovieLists from "./components/MovieLists";
 import Navbar from "./components/Navbar";
 import Rightbar from "./components/Rightbar";
 import WatchList from "./components/WatchList";
-import { useLocalStorage } from "./hooks/useLocalStorage";
 import { useMovie } from "./hooks/useMovie";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 const KEY = "9b288b21";
 
 function App() {
@@ -18,7 +18,10 @@ function App() {
   const [movieRating, setMovieRating] = useState(0);
 
   const { movies, loading, error } = useMovie(query, setShowWatchList);
-  const { watchListMovies, setWatchListMovies } = useLocalStorage([]);
+  const [watchListMovies, setWatchListMovies] = useLocalStorage(
+    [],
+    "watch-list"
+  );
 
   const showMovieDetails = async (movie) => {
     try {

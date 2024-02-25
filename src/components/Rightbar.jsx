@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Box from "./Box";
 import MovieDetails from "./MovieDetails";
 import Star from "./Star";
+import { useKey } from "../hooks/useKey";
 
 function Rightbar({
   movieRating,
@@ -31,19 +32,7 @@ function Rightbar({
     };
   }, [selectedMovie.Title]);
 
-  const handleUserKeyPress = (e) => {
-    if (e.key === "Escape") {
-      setShowWatchList(true);
-      console.log("gfbf");
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleUserKeyPress);
-    return () => {
-      document.removeEventListener("keydown", handleUserKeyPress);
-    };
-  }, [handleUserKeyPress]);
+  useKey("Escape", setShowWatchList);
 
   return (
     <Box expand={expand} onClick={clickHandler}>
