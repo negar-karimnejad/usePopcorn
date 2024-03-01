@@ -22,7 +22,7 @@ function WatchList({ watchListMovies, deleteFromWachlist }) {
     <Box>
       <div className="py-5 shadow-xl shadow-gray-800 rounded-xl pb-4">
         <h3 className="font-bold text-white px-5 mb-2">MOVIES YOU WATCHED</h3>
-        <div className="px-4 flex justify-between items-center">
+        <div className="px-4 flex max-sm:flex-col justify-between sm:items-center">
           <SummaryBox>
             <span>#️⃣</span>
             {watchListMovies?.length} movies

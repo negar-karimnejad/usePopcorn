@@ -10,7 +10,7 @@ function Search({ setQuery, query }) {
   }, []);
 
   return (
-    <form className="w-1/2 mx-auto" onSubmit={(e) => e.preventDefault()}>
+    <form className="sm:w-1/2 mx-auto w-full" onSubmit={(e) => e.preventDefault()}>
       <Input
         placeholder="Search movies..."
         value={query}
